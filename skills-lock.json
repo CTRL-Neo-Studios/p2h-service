@@ -7,9 +7,9 @@
       "computedHash": "571d9ea31a6f18b94168894814f20df361773e16de4a6dc675b526aaf6d55a45"
     },
     "nuxt-ui": {
-      "source": "onmax/nuxt-skills",
+      "source": "nuxt/ui",
       "sourceType": "github",
-      "computedHash": "c793a5cefc7a23a1e2e9fb637372ab5c4f9d1c26f04a7abba91ffa51c9726485"
+      "computedHash": "c3dbbd219dc94e345faa0b5cc4c03638f4361f8b0efa9f34c7dfa2c6dba65a9d"
     },
     "vue": {
       "source": "onmax/nuxt-skills",
