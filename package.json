@@ -14,11 +14,13 @@
     "@iconify-json/simple-icons": "^1.2.75",
     "@nuxt/image": "2.0.0",
     "@nuxt/ui": "^4.6.0",
+    "dompurify": "^3.3.3",
     "nuxt": "^4.4.2",
     "pdf2html": "^4.4.0",
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
+    "@types/dompurify": "^3.2.0",
     "typescript": "^6.0.2",
     "vue-tsc": "^3.2.6"
   },

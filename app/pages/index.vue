@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import DOMPurify from "dompurify";
+
 const OPERATIONS = [
 	{
 		label: "HTML Conversion",
@@ -135,6 +137,32 @@ function reset() {
 	result.value = null;
 	error.value = null;
 }
+
+/**
+ * Sanitize HTML with DOMPurify before putting it into an iframe srcdoc.
+ * WHOLE_DOCUMENT: true so the full <html>/<head>/<body> structure is preserved.
+ */
+function sanitize(html: string, wholeDocument = true): string {
+	return DOMPurify.sanitize(html, {
+		WHOLE_DOCUMENT: wholeDocument,
+		FORCE_BODY: false,
+		ADD_TAGS: ["meta"],
+		ADD_ATTR: ["content", "name", "xmlns", "http-equiv"],
+	});
+}
+
+/**
+ * Wrap a body fragment in a minimal HTML shell so it can be used as iframe srcdoc.
+ */
+function wrapFragment(html: string): string {
+	return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>body{font-family:sans-serif;font-size:14px;line-height:1.6;padding:12px;margin:0}</style></head><body>${sanitize(html, false)}</body></html>`;
+}
+
+/** Full sanitized document string for the html operation result. */
+const sanitizedFullHtml = computed((): string => {
+	if (operation.value !== "html" || !result.value?.html) return "";
+	return sanitize(result.value.html as string, true);
+});
 </script>
 
 <template>
@@ -373,12 +401,13 @@ function reset() {
 						<!-- HTML result -->
 						<template v-if="operation === 'html' && result.html">
 							<div class="text-xs text-muted mb-2">Rendered HTML output</div>
-							<div
-								class="prose prose-sm max-w-none p-4 bg-elevated rounded-md max-h-[600px] overflow-y-auto border border-default text-sm"
-								v-html="result.html as string"
+							<iframe
+								:srcdoc="sanitizedFullHtml"
+								sandbox="allow-same-origin"
+								class="w-full rounded-md border border-default bg-white"
+								style="height: 600px;"
+								title="PDF HTML preview"
 							/>
-							<div class="font-mono">{{ result.html }}</div>
-							<div v-html="result.html"/>
 						</template>
 
 						<!-- Text result -->
@@ -406,10 +435,13 @@ function reset() {
 								type="multiple"
 							>
 								<template #content="{ item }">
-									<div
+									<iframe
 										v-if="result.mode === 'html'"
-										class="prose prose-sm max-w-none p-3 text-sm"
-										v-html="item.content"
+										:srcdoc="wrapFragment(item.content)"
+										sandbox="allow-same-origin"
+										class="w-full rounded-md border border-default bg-white"
+										style="height: 400px;"
+										title="PDF page preview"
 									/>
 									<pre v-else class="p-3 text-sm whitespace-pre-wrap">{{
 										item.content
