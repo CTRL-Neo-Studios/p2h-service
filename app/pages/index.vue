@@ -377,6 +377,8 @@ function reset() {
 								class="prose prose-sm max-w-none p-4 bg-elevated rounded-md max-h-[600px] overflow-y-auto border border-default text-sm"
 								v-html="result.html as string"
 							/>
+							<div class="font-mono">{{ result.html }}</div>
+							<div v-html="result.html"/>
 						</template>
 
 						<!-- Text result -->
