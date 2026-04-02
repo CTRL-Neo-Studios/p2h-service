@@ -1,29 +1,29 @@
 {
-  "name": "p2h-service",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "typecheck": "nuxt typecheck"
-  },
-  "dependencies": {
-    "@iconify-json/lucide": "^1.2.100",
-    "@iconify-json/simple-icons": "^1.2.75",
-    "@nuxt/image": "2.0.0",
-    "@nuxt/ui": "^4.6.0",
-    "nuxt": "^4.4.2",
-    "pdf2html": "^4.4.0",
-    "tailwindcss": "^4.2.2"
-  },
-  "devDependencies": {
-    "typescript": "^6.0.2",
-    "vue-tsc": "^3.2.6"
-  },
-  "trustedDependencies": [
-    "@parcel/watcher",
-    "unrs-resolver"
-  ]
+	"name": "p2h-service",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "nuxt build",
+		"dev": "nuxt dev",
+		"preview": "nuxt preview",
+		"postinstall": "nuxt prepare",
+		"typecheck": "nuxt typecheck"
+	},
+	"dependencies": {
+		"@iconify-json/lucide": "^1.2.100",
+		"@iconify-json/simple-icons": "^1.2.75",
+		"@nuxt/image": "2.0.0",
+		"@nuxt/ui": "^4.6.0",
+		"nuxt": "^4.4.2",
+		"pdf2html": "^4.4.0",
+		"tailwindcss": "^4.2.2"
+	},
+	"devDependencies": {
+		"typescript": "^6.0.2",
+		"vue-tsc": "^3.2.6"
+	},
+	"trustedDependencies": [
+		"@parcel/watcher",
+		"unrs-resolver"
+	]
 }

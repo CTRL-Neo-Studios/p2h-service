@@ -54,14 +54,17 @@ Read specific files based on current work:
 
 ```ts
 // server/api/hello.get.ts
-import { z } from 'zod'
+import { z } from "zod";
 
 export default defineEventHandler(async (event) => {
-  const { name } = await getValidatedQuery(event, z.object({
-    name: z.string().default('world'),
-  }).parse)
-  return { message: `Hello ${name}` }
-})
+	const { name } = await getValidatedQuery(
+		event,
+		z.object({
+			name: z.string().default("world"),
+		}).parse,
+	);
+	return { message: `Hello ${name}` };
+});
 ```
 
 ## Nuxt 4 vs Older Versions

@@ -13,6 +13,7 @@ A self-hosted PDF conversion service built with [Nuxt 4](https://nuxt.com) and [
 - **Bun** >= 1.2 (package manager)
 
 Verify Java is available:
+
 ```bash
 java -version
 ```
@@ -36,15 +37,16 @@ cp .env.example .env
 
 All configuration is via environment variables. Copy `.env.example` to `.env` and adjust:
 
-| Variable | Required | Default | Description |
-|---|---|---|---|
-| `API_KEYS` | Yes | — | Comma-separated list of valid API keys |
-| `RATE_LIMIT_MAX` | No | `60` | Max requests per key per window |
-| `RATE_LIMIT_WINDOW_MS` | No | `60000` | Rate limit window in milliseconds |
-| `MAX_FILE_SIZE` | No | _(unlimited)_ | Max PDF upload size in bytes |
-| `NUXT_PUBLIC_SITE_URL` | No | `http://localhost:3000` | Public URL of this service |
+| Variable               | Required | Default                 | Description                            |
+| ---------------------- | -------- | ----------------------- | -------------------------------------- |
+| `API_KEYS`             | Yes      | —                       | Comma-separated list of valid API keys |
+| `RATE_LIMIT_MAX`       | No       | `60`                    | Max requests per key per window        |
+| `RATE_LIMIT_WINDOW_MS` | No       | `60000`                 | Rate limit window in milliseconds      |
+| `MAX_FILE_SIZE`        | No       | _(unlimited)_           | Max PDF upload size in bytes           |
+| `NUXT_PUBLIC_SITE_URL` | No       | `http://localhost:3000` | Public URL of this service             |
 
 Generate a key:
+
 ```bash
 openssl rand -hex 32
 ```
@@ -85,6 +87,7 @@ curl -X POST https://your-service.example.com/api/convert/html \
 ```
 
 **Response:**
+
 ```json
 { "success": true, "data": { "html": "<html>...</html>" } }
 ```
@@ -102,6 +105,7 @@ curl -X POST https://your-service.example.com/api/convert/text \
 ```
 
 **Response:**
+
 ```json
 { "success": true, "data": { "text": "Lorem ipsum..." } }
 ```
@@ -112,9 +116,9 @@ curl -X POST https://your-service.example.com/api/convert/text \
 
 Get HTML or text per page.
 
-| Query param | Default | Description |
-|---|---|---|
-| `text` | `false` | Set to `true` to get text instead of HTML |
+| Query param | Default | Description                               |
+| ----------- | ------- | ----------------------------------------- |
+| `text`      | `false` | Set to `true` to get text instead of HTML |
 
 ```bash
 # HTML per page
@@ -129,6 +133,7 @@ curl -X POST "https://your-service.example.com/api/convert/pages?text=true" \
 ```
 
 **Response:**
+
 ```json
 { "success": true, "data": { "pages": ["<p>Page 1...</p>", "..."], "mode": "html" } }
 ```
@@ -146,17 +151,18 @@ curl -X POST https://your-service.example.com/api/convert/meta \
 ```
 
 **Response:**
+
 ```json
 {
-  "success": true,
-  "data": {
-    "meta": {
-      "dc:title": "My Document",
-      "dc:creator": "John Doe",
-      "xmp:CreatorTool": "Microsoft Word",
-      "pdf:PDFVersion": "1.7"
-    }
-  }
+	"success": true,
+	"data": {
+		"meta": {
+			"dc:title": "My Document",
+			"dc:creator": "John Doe",
+			"xmp:CreatorTool": "Microsoft Word",
+			"pdf:PDFVersion": "1.7"
+		}
+	}
 }
 ```
 
@@ -166,12 +172,12 @@ curl -X POST https://your-service.example.com/api/convert/meta \
 
 Generate a preview image for a specific page.
 
-| Query param | Default | Description |
-|---|---|---|
-| `page` | `1` | Page number to render |
-| `imageType` | `png` | `png` or `jpg` |
-| `width` | `160` | Output width in pixels |
-| `height` | `226` | Output height in pixels |
+| Query param | Default | Description             |
+| ----------- | ------- | ----------------------- |
+| `page`      | `1`     | Page number to render   |
+| `imageType` | `png`   | `png` or `jpg`          |
+| `width`     | `160`   | Output width in pixels  |
+| `height`    | `226`   | Output height in pixels |
 
 ```bash
 curl -X POST "https://your-service.example.com/api/convert/thumbnail?page=1&imageType=png&width=300" \
@@ -180,13 +186,14 @@ curl -X POST "https://your-service.example.com/api/convert/thumbnail?page=1&imag
 ```
 
 **Response:**
+
 ```json
 {
-  "success": true,
-  "data": {
-    "image": "<base64 string>",
-    "mimeType": "image/png"
-  }
+	"success": true,
+	"data": {
+		"image": "<base64 string>",
+		"mimeType": "image/png"
+	}
 }
 ```
 
@@ -203,15 +210,16 @@ curl -X POST https://your-service.example.com/api/convert/images \
 ```
 
 **Response:**
+
 ```json
 {
-  "success": true,
-  "data": {
-    "images": [
-      { "data": "<base64>", "mimeType": "image/png" },
-      { "data": "<base64>", "mimeType": "image/jpeg" }
-    ]
-  }
+	"success": true,
+	"data": {
+		"images": [
+			{ "data": "<base64>", "mimeType": "image/png" },
+			{ "data": "<base64>", "mimeType": "image/jpeg" }
+		]
+	}
 }
 ```
 

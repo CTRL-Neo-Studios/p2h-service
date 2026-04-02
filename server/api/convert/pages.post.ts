@@ -13,16 +13,15 @@
  *   { success: true, data: { pages: string[], mode: 'html' | 'text' } }
  */
 export default defineEventHandler(async (event) => {
-  const buffer = await readPdfUpload(event)
-  const query = getQuery(event)
-  const textMode = query.text === 'true' || query.text === '1'
+	const buffer = await readPdfUpload(event);
+	const query = getQuery(event);
+	const textMode = query.text === "true" || query.text === "1";
 
-  try {
-    const pages = await pdfToPages(buffer, { text: textMode })
-    return successResponse({ pages, mode: textMode ? 'text' : 'html' })
-  }
-  catch (err) {
-    const message = err instanceof Error ? err.message : 'Page extraction failed'
-    return errorResponse(message, 500, event)
-  }
-})
+	try {
+		const pages = await pdfToPages(buffer, { text: textMode });
+		return successResponse({ pages, mode: textMode ? "text" : "html" });
+	} catch (err) {
+		const message = err instanceof Error ? err.message : "Page extraction failed";
+		return errorResponse(message, 500, event);
+	}
+});

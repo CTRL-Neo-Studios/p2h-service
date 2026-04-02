@@ -10,64 +10,64 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  ci:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with: {node-version: 22, cache: pnpm}
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm prepare
-      - run: pnpm lint
-      - run: pnpm typecheck
-      - run: pnpm test # if tests exist
+    ci:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v4
+            - uses: actions/setup-node@v4
+              with: { node-version: 22, cache: pnpm }
+            - run: pnpm install --frozen-lockfile
+            - run: pnpm prepare
+            - run: pnpm lint
+            - run: pnpm typecheck
+            - run: pnpm test # if tests exist
 ```
 
 **With env vars:**
 
 ```yaml
 env:
-  DATABASE_URL: postgresql://test:test@localhost:5432/test
-  API_KEY: test
+    DATABASE_URL: postgresql://test:test@localhost:5432/test
+    API_KEY: test
 ```
 
 ## ESLint Config
 
 ```js
 // eslint.config.mjs
-import antfu from '@antfu/eslint-config'
-import withNuxt from './.nuxt/eslint.config.mjs'
+import antfu from "@antfu/eslint-config";
+import withNuxt from "./.nuxt/eslint.config.mjs";
 
 export default withNuxt(
-  antfu({
-    formatters: true,
-    vue: true,
-    pnpm: true,
-    ignores: ['.eslintcache', 'cache/**', '.claude/**', 'README.md', 'docs/**'],
-  }),
-)
+	antfu({
+		formatters: true,
+		vue: true,
+		pnpm: true,
+		ignores: [".eslintcache", "cache/**", ".claude/**", "README.md", "docs/**"],
+	}),
+);
 ```
 
 **For monorepos, add:**
 
 ```js
-ignores: ['apps/web/.nuxt/**', 'packages/**/dist/**']
+ignores: ["apps/web/.nuxt/**", "packages/**/dist/**"];
 ```
 
 ## Package Scripts
 
 ```json
 {
-  "scripts": {
-    "dev": "nuxt dev",
-    "build": "nuxt build",
-    "preview": "nuxt preview",
-    "prepare": "nuxt prepare",
-    "lint": "eslint . --cache",
-    "lint:fix": "eslint . --fix --cache",
-    "typecheck": "nuxt typecheck"
-  }
+	"scripts": {
+		"dev": "nuxt dev",
+		"build": "nuxt build",
+		"preview": "nuxt preview",
+		"prepare": "nuxt prepare",
+		"lint": "eslint . --cache",
+		"lint:fix": "eslint . --fix --cache",
+		"typecheck": "nuxt typecheck"
+	}
 }
 ```
 
@@ -90,18 +90,18 @@ name: Deploy to NuxtHub
 on: push
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    permissions: {contents: read, id-token: write}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with: {node-version: 22, cache: pnpm}
-      - run: pnpm install
-      - uses: nuxt-hub/action@v2
-        with:
-          project-key: your-project-key
+    deploy:
+        runs-on: ubuntu-latest
+        permissions: { contents: read, id-token: write }
+        steps:
+            - uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v4
+            - uses: actions/setup-node@v4
+              with: { node-version: 22, cache: pnpm }
+            - run: pnpm install
+            - uses: nuxt-hub/action@v2
+              with:
+                  project-key: your-project-key
 ```
 
 > **For pnpm catalogs, release workflows, tsconfig patterns:** see `ts-library` skill

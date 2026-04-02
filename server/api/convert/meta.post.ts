@@ -10,14 +10,13 @@
  *   { success: true, data: { meta: object } }
  */
 export default defineEventHandler(async (event) => {
-  const buffer = await readPdfUpload(event)
+	const buffer = await readPdfUpload(event);
 
-  try {
-    const meta = await pdfMeta(buffer)
-    return successResponse({ meta })
-  }
-  catch (err) {
-    const message = err instanceof Error ? err.message : 'Metadata extraction failed'
-    return errorResponse(message, 500, event)
-  }
-})
+	try {
+		const meta = await pdfMeta(buffer);
+		return successResponse({ meta });
+	} catch (err) {
+		const message = err instanceof Error ? err.message : "Metadata extraction failed";
+		return errorResponse(message, 500, event);
+	}
+});

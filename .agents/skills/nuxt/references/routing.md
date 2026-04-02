@@ -66,12 +66,12 @@ pages/
 ```ts
 // middleware/auth.global.ts
 export default defineNuxtRouteMiddleware((to) => {
-  // Check if route is in admin group
-  if (to.meta.groups?.includes('admin')) {
-    const auth = useAuthStore()
-    if (!auth.isAdmin) return navigateTo('/')
-  }
-})
+	// Check if route is in admin group
+	if (to.meta.groups?.includes("admin")) {
+		const auth = useAuthStore();
+		if (!auth.isAdmin) return navigateTo("/");
+	}
+});
 ```
 
 ## Parent Routes (Layouts)
@@ -81,13 +81,13 @@ Parent route = layout for nested routes:
 ```vue
 <!-- pages/users.vue -->
 <template>
-  <div class="users-layout">
-    <nav>
-      <NuxtLink to="/users">All Users</NuxtLink>
-      <NuxtLink to="/users/create">Create User</NuxtLink>
-    </nav>
-    <NuxtPage />
-  </div>
+	<div class="users-layout">
+		<nav>
+			<NuxtLink to="/users">All Users</NuxtLink>
+			<NuxtLink to="/users/create">Create User</NuxtLink>
+		</nav>
+		<NuxtPage />
+	</div>
 </template>
 ```
 
@@ -107,19 +107,19 @@ pages/
 ```vue
 <script setup lang="ts">
 definePage({
-  name: 'user-profile',
-  path: '/profile/:userId',  // Override default path
-  alias: ['/me', '/profile'],
-  meta: {
-    requiresAuth: true,
-    title: 'User Profile',
-    roles: ['user', 'admin']
-  }
-})
+	name: "user-profile",
+	path: "/profile/:userId", // Override default path
+	alias: ["/me", "/profile"],
+	meta: {
+		requiresAuth: true,
+		title: "User Profile",
+		roles: ["user", "admin"],
+	},
+});
 </script>
 
 <template>
-  <div>Profile content</div>
+	<div>Profile content</div>
 </template>
 ```
 
@@ -129,10 +129,10 @@ definePage({
 
 ```ts
 // ✅ Type-safe with route name
-await navigateTo({ name: '/users/[userId]', params: { userId: '123' } })
+await navigateTo({ name: "/users/[userId]", params: { userId: "123" } });
 
 // ❌ String-based (not type-safe, avoid)
-await navigateTo('/users/123')
+await navigateTo("/users/123");
 ```
 
 **REQUIRED: Check `typed-router.d.ts` for available route names and params before navigating.**
@@ -143,10 +143,10 @@ Pass route name for stricter typing:
 
 ```ts
 // Generic route
-const route = useRoute()
+const route = useRoute();
 
 // Typed route (preferred)
-const route = useRoute('/users/[userId]')
+const route = useRoute("/users/[userId]");
 // route.params.userId is now typed correctly
 ```
 
@@ -154,20 +154,20 @@ const route = useRoute('/users/[userId]')
 
 ```ts
 // Navigate to route
-await navigateTo('/about')
-await navigateTo({ name: '/users/[userId]', params: { userId: '123' } })
+await navigateTo("/about");
+await navigateTo({ name: "/users/[userId]", params: { userId: "123" } });
 
 // Navigate with query
-await navigateTo({ path: '/search', query: { q: 'nuxt' } })
+await navigateTo({ path: "/search", query: { q: "nuxt" } });
 
 // External redirect
-await navigateTo('https://nuxt.com', { external: true })
+await navigateTo("https://nuxt.com", { external: true });
 
 // Replace history
-await navigateTo('/login', { replace: true })
+await navigateTo("/login", { replace: true });
 
 // Open in new tab
-await navigateTo('/docs', { open: { target: '_blank' } })
+await navigateTo("/docs", { open: { target: "_blank" } });
 ```
 
 ## Route Meta & Middleware
@@ -175,12 +175,12 @@ await navigateTo('/docs', { open: { target: '_blank' } })
 ```vue
 <script setup lang="ts">
 definePageMeta({
-  middleware: ['auth', 'admin'],
-  layout: 'dashboard',
-  meta: {
-    requiresAuth: true
-  }
-})
+	middleware: ["auth", "admin"],
+	layout: "dashboard",
+	meta: {
+		requiresAuth: true,
+	},
+});
 </script>
 ```
 
@@ -190,20 +190,20 @@ Use `setPageLayout()` to switch layouts programmatically:
 
 ```vue
 <script setup lang="ts">
-const user = useUser()
+const user = useUser();
 
 // Switch layout based on auth state
 if (!user.value) {
-  setPageLayout('guest')
+	setPageLayout("guest");
 } else {
-  setPageLayout('dashboard')
+	setPageLayout("dashboard");
 }
 
 // With layout props (Nuxt 4.3+)
-setPageLayout('dashboard', {
-  sidebar: 'collapsed',
-  theme: 'dark'
-})
+setPageLayout("dashboard", {
+	sidebar: "collapsed",
+	theme: "dark",
+});
 </script>
 ```
 

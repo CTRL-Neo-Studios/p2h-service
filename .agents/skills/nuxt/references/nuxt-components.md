@@ -18,20 +18,20 @@ Working with images, links, or time display in templates. **Always prefer Nuxt c
 
 ```vue
 <template>
-  <!-- Internal navigation -->
-  <NuxtLink to="/about">About</NuxtLink>
-  <NuxtLink :to="{ name: '/users/[userId]', params: { userId } }">Profile</NuxtLink>
+	<!-- Internal navigation -->
+	<NuxtLink to="/about">About</NuxtLink>
+	<NuxtLink :to="{ name: '/users/[userId]', params: { userId } }">Profile</NuxtLink>
 
-  <!-- External links (uses target="_blank" automatically with external) -->
-  <NuxtLink to="https://nuxt.com" external>Nuxt Docs</NuxtLink>
+	<!-- External links (uses target="_blank" automatically with external) -->
+	<NuxtLink to="https://nuxt.com" external>Nuxt Docs</NuxtLink>
 
-  <!-- Prefetch control -->
-  <NuxtLink to="/dashboard" :prefetch="false">Dashboard</NuxtLink>
+	<!-- Prefetch control -->
+	<NuxtLink to="/dashboard" :prefetch="false">Dashboard</NuxtLink>
 
-  <!-- Active state styling -->
-  <NuxtLink to="/settings" active-class="text-primary" exact-active-class="font-bold">
-    Settings
-  </NuxtLink>
+	<!-- Active state styling -->
+	<NuxtLink to="/settings" active-class="text-primary" exact-active-class="font-bold">
+		Settings
+	</NuxtLink>
 </template>
 ```
 
@@ -55,32 +55,32 @@ Requires `@nuxt/image` module (usually pre-installed).
 
 ```vue
 <template>
-  <!-- Basic usage -->
-  <NuxtImg src="/images/hero.jpg" alt="Hero image" />
+	<!-- Basic usage -->
+	<NuxtImg src="/images/hero.jpg" alt="Hero image" />
 
-  <!-- Responsive with sizes -->
-  <NuxtImg
-    src="/images/banner.jpg"
-    alt="Banner"
-    width="1200"
-    height="600"
-    sizes="100vw sm:50vw md:400px"
-  />
+	<!-- Responsive with sizes -->
+	<NuxtImg
+		src="/images/banner.jpg"
+		alt="Banner"
+		width="1200"
+		height="600"
+		sizes="100vw sm:50vw md:400px"
+	/>
 
-  <!-- Lazy loading (default) -->
-  <NuxtImg src="/images/photo.jpg" loading="lazy" alt="Photo" />
+	<!-- Lazy loading (default) -->
+	<NuxtImg src="/images/photo.jpg" loading="lazy" alt="Photo" />
 
-  <!-- Eager loading for above-fold -->
-  <NuxtImg src="/images/logo.svg" loading="eager" alt="Logo" />
+	<!-- Eager loading for above-fold -->
+	<NuxtImg src="/images/logo.svg" loading="eager" alt="Logo" />
 
-  <!-- With placeholder blur -->
-  <NuxtImg src="/images/product.jpg" placeholder alt="Product" />
+	<!-- With placeholder blur -->
+	<NuxtImg src="/images/product.jpg" placeholder alt="Product" />
 
-  <!-- Provider-specific (Cloudinary, etc.) -->
-  <NuxtImg provider="cloudinary" src="/folder/image.jpg" width="500" />
+	<!-- Provider-specific (Cloudinary, etc.) -->
+	<NuxtImg provider="cloudinary" src="/folder/image.jpg" width="500" />
 
-  <!-- Format conversion -->
-  <NuxtImg src="/images/photo.png" format="webp" alt="Photo" />
+	<!-- Format conversion -->
+	<NuxtImg src="/images/photo.png" format="webp" alt="Photo" />
 </template>
 ```
 
@@ -106,23 +106,23 @@ Requires `@nuxt/image` module (usually pre-installed).
 
 ```vue
 <template>
-  <!-- Relative time -->
-  <NuxtTime :datetime="post.createdAt" relative />
-  <!-- Output: "2 hours ago" -->
+	<!-- Relative time -->
+	<NuxtTime :datetime="post.createdAt" relative />
+	<!-- Output: "2 hours ago" -->
 
-  <!-- Absolute with locale -->
-  <NuxtTime :datetime="event.date" locale="en-US" />
+	<!-- Absolute with locale -->
+	<NuxtTime :datetime="event.date" locale="en-US" />
 
-  <!-- Custom format -->
-  <NuxtTime :datetime="date" year="numeric" month="long" day="numeric" />
-  <!-- Output: "December 6, 2025" -->
+	<!-- Custom format -->
+	<NuxtTime :datetime="date" year="numeric" month="long" day="numeric" />
+	<!-- Output: "December 6, 2025" -->
 
-  <!-- Short format -->
-  <NuxtTime :datetime="date" month="short" day="numeric" />
-  <!-- Output: "Dec 6" -->
+	<!-- Short format -->
+	<NuxtTime :datetime="date" month="short" day="numeric" />
+	<!-- Output: "Dec 6" -->
 
-  <!-- With time -->
-  <NuxtTime :datetime="date" hour="numeric" minute="2-digit" />
+	<!-- With time -->
+	<NuxtTime :datetime="date" hour="numeric" minute="2-digit" />
 </template>
 ```
 

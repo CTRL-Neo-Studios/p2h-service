@@ -10,14 +10,13 @@
  *   { success: true, data: { html: string } }
  */
 export default defineEventHandler(async (event) => {
-  const buffer = await readPdfUpload(event)
+	const buffer = await readPdfUpload(event);
 
-  try {
-    const html = await pdfToHtml(buffer)
-    return successResponse({ html })
-  }
-  catch (err) {
-    const message = err instanceof Error ? err.message : 'PDF conversion failed'
-    return errorResponse(message, 500, event)
-  }
-})
+	try {
+		const html = await pdfToHtml(buffer);
+		return successResponse({ html });
+	} catch (err) {
+		const message = err instanceof Error ? err.message : "PDF conversion failed";
+		return errorResponse(message, 500, event);
+	}
+});
